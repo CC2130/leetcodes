@@ -81,11 +81,10 @@ pub fn longest_palindrome(s: String) -> String {
             }
             next = false;
             // 单个元素位置检查
-            for i in 0..singles.len() {
-                let i = singles[i];
+            for i in singles.iter() {
                 println!("{}", i);
-                if head < i && i < tail {
-                    if i != (head + tail) / 2 {
+                if head < *i && *i < tail {
+                    if *i != (head + tail) / 2 {
                         next = true;
                         break;
                     }

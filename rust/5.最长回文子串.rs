@@ -30,6 +30,11 @@ impl Solution {
             }
         }
 
+        let mut singles = Vec::new();
+        for e in store.iter().filter(|x| x.1.len() == 1) {
+            singles.push(e.1[0]);
+        }
+
         let mut res = String::from_utf8(vec![_buffer[0]]).unwrap();
         let mut head = 0;
         let mut tail;
@@ -38,6 +43,7 @@ impl Solution {
         let mut i;
         let mut len;
         let mut max = 1;
+        let mut next;
         // 从左开始
         while head < buffer.len() {
             // 得到当前位置的元素
@@ -55,8 +61,24 @@ impl Solution {
                 len = tail - head + 1;
                 // 后面都不用试了，下一个元素 i += 1
                 if len <= max {
-                    break
+                    break;
                 }
+
+                // 排除单个存在的元素
+                next = false;
+                for i in singles.iter() {
+                    if head < *i && *i < tail {
+                        if *i != (head + tail) / 2 {
+                            next = true;
+                            break;
+                        }
+                    }
+                }
+                if next {
+                    i -= 1;
+                    continue;
+                }
+
                 let mut l = head;
                 let mut r = tail;
                 // 这里开始匹配
