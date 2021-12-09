@@ -1,6 +1,10 @@
 fn main() {
     println!("Hello, world!");
-    test();
+    let a = vec![0, 1, 2];
+    for i in 1..1 {
+        println!("fk: {}", a[i]);
+    }
+    //test();
 }
 
 fn test() {
