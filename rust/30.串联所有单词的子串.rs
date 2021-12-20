@@ -30,20 +30,18 @@ impl Solution {
             while dc.contains_key(&s[j..j + size]) {
                 let c = dc.get_mut(&s[j..j + size]).unwrap();
                 if *c == 0 {
-                    dc = dict.clone();
                     break
                 } else {
                     *c -= 1;
                 }
                 j += size;
                 if j == i + max {
-                    dc = dict.clone();
                     res.push(i as i32);
                     break;
                 }
             }
             i += 1;
-            //dc = dict.clone();
+            dc = dict.clone();
         }
 
         res
