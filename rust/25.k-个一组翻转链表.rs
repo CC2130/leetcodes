@@ -22,23 +22,32 @@
 //   }
 // }
 impl Solution {
-    pub fn reverse_k_group(mut head: Option<Box<ListNode>>, k: i32) -> Option<Box<ListNode>> {
+    pub fn reverse_k_group(head: Option<Box<ListNode>>, k: i32) -> Option<Box<ListNode>> {
+        let mut head = head;
         let mut tail = &mut head;
-        for _ in 0..k {
-            if let Some(node) = tail {
-                tail = &mut node.next;
-            } else {
-                return head
+        let mut queue = vec![];
+        let mut other;
+        'a: loop {
+            for _ in 0..k {
+                if let Some(node) = tail {
+                    tail = &mut node.next;
+                } else {
+                    break 'a;
+                }
             }
+            other = tail.take();
+            queue.push(head);
+            head = other;
+            tail = &mut head;
         }
 
-        let mut others = tail.take();
-        let mut tail = Solution::reverse_k_group(others, k);
-
-        while let Some(mut header) = head.take() {
-            head = header.next.take();
-            header.next = tail;
-            tail = Some(header);
+        let mut tail = head;
+        while let Some(mut v) = queue.pop() {
+            while let Some(mut node) = v {
+                v = node.next.take();
+                node.next = tail;
+                tail = Some(node);
+            }
         }
 
         tail
