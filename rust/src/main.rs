@@ -4,6 +4,14 @@ fn main() {
 }
 
 
+/// 接雨水
+/// 从第一个非零数为基准，位置为 a
+/// 向右找到小于基准数的位置，例 x， 则池范围为 a 至 x -1
+/// 基准为 x -1，重复上步
+fn trap(height: Vec<i32>) -> i32 {
+    0
+}
+
 fn is_happy(n: i32) -> bool {
     let mut n = n;
     let mut t;
