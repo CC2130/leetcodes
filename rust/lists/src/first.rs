@@ -29,13 +29,13 @@ impl List {
             next: mem::replace(&mut self.head, Link::Empty),
         });
         println!("self.head: {:?}", self.head);
-    
+
         self.head = Link::More(new_node);
     }
 
     pub fn pop(&mut self) -> Option<i32> {
         match mem::replace(&mut self.head, Link::Empty) {
-            Link::Empty => { None },
+            Link::Empty => None,
             Link::More(node) => {
                 self.head = node.next;
                 Some(node.elem)
@@ -43,4 +43,3 @@ impl List {
         }
     }
 }
-

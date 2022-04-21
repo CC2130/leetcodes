@@ -19,9 +19,9 @@ impl<T> List<T> {
     pub fn push(&mut self, elem: T) {
         let new_node = Box::new(Node {
             elem: elem,
-            next: self.head.take()
+            next: self.head.take(),
         });
-    
+
         self.head = Some(new_node);
     }
 
@@ -37,11 +37,15 @@ impl<T> List<T> {
     }
 
     pub fn iter(&self) -> Iter<T> {
-        Iter { next: self.head.as_deref() }
+        Iter {
+            next: self.head.as_deref(),
+        }
     }
 
     pub fn iter_mut(&mut self) -> IterMut<'_, T> {
-        IterMut { next: self.head.as_deref_mut() }
+        IterMut {
+            next: self.head.as_deref_mut(),
+        }
     }
 }
 
@@ -65,7 +69,7 @@ impl<T> Iterator for IntoIter<T> {
 }
 
 pub struct Iter<'a, T> {
-    next: Option<&'a Node<T>>
+    next: Option<&'a Node<T>>,
 }
 
 impl<'a, T> Iterator for Iter<'a, T> {
@@ -80,7 +84,7 @@ impl<'a, T> Iterator for Iter<'a, T> {
 }
 
 pub struct IterMut<'a, T> {
-    next: Option<&'a mut Node<T>>
+    next: Option<&'a mut Node<T>>,
 }
 
 impl<'a, T> Iterator for IterMut<'a, T> {
